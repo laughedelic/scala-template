@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  scalafmt:
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: AvaPL/scalafmt-native-formatter@v0.1.0
+
+  build-lint-test:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2
+      - uses: laughedelic/coursier-setup@v1
+      - uses: coursier/cache-action@v5
+
+      - name: Resolve dependencies
+        run: sbtn update
+
+      - name: Run tests
+        run: sbtn Test/test
+
+      - name: Publish JUnit test report
+        if: always() # publish report when tests fail
+        uses: mikepenz/action-junit-report@v2
+        with:
+          github_token: ${{ github.token }}
+          report_paths: "**/target/test-reports/*.xml"
