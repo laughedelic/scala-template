@@ -1,2 +1,3 @@
-# scala-template
-Template repo for a simple Scala project
+# project name
+
+One line description
