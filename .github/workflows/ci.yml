@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: AvaPL/scalafmt-native-formatter@v0.1.0
+      - uses: AvaPL/scalafmt-native-formatter@v0.1.2
 
   build-lint-test:
     timeout-minutes: 5
