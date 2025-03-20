@@ -19,7 +19,7 @@ object SubProject extends AutoPlugin {
       semanticdbEnabled := true, // enable SemanticDB
       semanticdbVersion := scalafixSemanticdb.revision, // use Scalafix compatible version
       scalafixDependencies ++= Seq(
-        "com.github.vovapolu" %% "scaluzzi" % "0.1.17",
+        "com.github.vovapolu" %% "scaluzzi" % "0.1.18",
         "com.eed3si9n.fix" %% "scalafix-noinfer" % "0.1.0-M1",
       ),
     )
